@@ -1,0 +1,46 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+uploads/
+*.log
+.DS_Store
+Thumbs.db
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+
+# Local database configuration
+application-local.properties
+
+# Uploaded resumes and user files
+uploads/
+
+# Maven build output
+target/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Exclude nested duplicate project
+/job-skill-matcher-platform/
+
+# Exclude sample database records until reviewed
+/sample-data.sql

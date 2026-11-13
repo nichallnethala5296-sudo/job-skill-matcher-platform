@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::div})}">
+<div>
+    <h3 class="fw-bold mb-4">My Submitted Applications</h3>
+    <div th:if="${#lists.isEmpty(applications)}" class="text-muted">No applications submitted yet.</div>
+    <table th:unless="${#lists.isEmpty(applications)}" class="table table-hover bg-white rounded border">
+        <thead class="table-light">
+            <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Match Score</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="app : ${applications}">
+                <td th:text="${app.job.title}">Title</td>
+                <td th:text="${app.job.company}">Company</td>
+                <td><span class="badge bg-success" th:text="${app.matchScoreAtApplication} + '%'"></span></td>
+                <td><span class="badge bg-primary" th:text="${app.status}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</html>

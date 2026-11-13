@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::div})}">
+<div>
+    <h3 class="fw-bold mb-4">Administration Console</h3>
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card card-custom p-3 text-center">
+                <h6>Total Users</h6>
+                <h3 class="fw-bold" th:text="${totalUsers}">0</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom p-3 text-center">
+                <h6>Candidates</h6>
+                <h3 class="fw-bold" th:text="${candidateCount}">0</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom p-3 text-center">
+                <h6>Recruiters</h6>
+                <h3 class="fw-bold" th:text="${recruiterCount}">0</h3>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom p-3 text-center">
+                <h6>Total Jobs</h6>
+                <h3 class="fw-bold" th:text="${totalJobs}">0</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom p-4 mb-4">
+        <h5 class="fw-bold mb-3">Skill Demand Analytics</h5>
+        <canvas id="skillsDistributionChart" height="90"></canvas>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card card-custom p-4">
+                <h5 class="fw-bold mb-3">Add Dictionary Skill</h5>
+                <form th:action="@{/admin/skills/add}" method="post">
+                    <input type="text" name="normalizedName" class="form-control mb-2" placeholder="Skill Name" required>
+                    <input type="text" name="category" class="form-control mb-3" placeholder="Category" required>
+                    <button type="submit" class="btn btn-primary btn-sm">Add Skill</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-custom p-4">
+                <h5 class="fw-bold mb-3">Add Curated Course</h5>
+                <form th:action="@{/admin/resources/add}" method="post">
+                    <input type="text" name="skillName" class="form-control mb-2" placeholder="Skill Name" required>
+                    <input type="text" name="title" class="form-control mb-2" placeholder="Course Title" required>
+                    <input type="text" name="provider" class="form-control mb-2" placeholder="Provider" required>
+                    <input type="url" name="url" class="form-control mb-3" placeholder="https://..." required>
+                    <button type="submit" class="btn btn-primary btn-sm">Add Resource</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

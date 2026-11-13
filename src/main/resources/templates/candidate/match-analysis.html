@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::div})}">
+<div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold mb-1" th:text="${job.title}">Position</h3>
+            <span class="text-muted" th:text="${job.company} + ' &bull; ' + ${job.location}">Company</span>
+        </div>
+        <div class="d-flex gap-2">
+            <form th:action="@{/candidate/save/{id}(id=${job.id})}" method="post">
+                <button type="submit" class="btn btn-outline-secondary">Save Job</button>
+            </form>
+            <form th:action="@{/candidate/apply/{id}(id=${job.id})}" method="post">
+                <button type="submit" class="btn btn-primary">Apply Now</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card card-custom p-4 text-center">
+                <h5>Overall Fit</h5>
+                <div class="score-circle mb-3"
+                     th:classappend="${match.overallScore >= 75 ? 'score-high' : (match.overallScore >= 50 ? 'score-med' : 'score-low')}"
+                     th:text="${match.overallScore} + '%'">85%</div>
+                <div class="text-start small text-muted border-top pt-2">
+                    Required Coverage: <strong th:text="${match.requiredCoveragePercentage} + '%'"></strong><br>
+                    Preferred Coverage: <strong th:text="${match.preferredCoveragePercentage} + '%'"></strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card card-custom p-4 mb-4">
+                <h5 class="fw-bold mb-3">Skill Breakdown</h5>
+                <h6 class="text-success"><i class="bi bi-check-circle me-1"></i> Matched Required Skills</h6>
+                <div class="mb-3">
+                    <span th:each="s : ${match.matchedRequiredSkills}" class="badge-skill" th:text="${s}"></span>
+                    <span th:if="${#lists.isEmpty(match.matchedRequiredSkills)}" class="text-muted small">None</span>
+                </div>
+                <h6 class="text-danger"><i class="bi bi-x-circle me-1"></i> Missing Required Skills (Gap)</h6>
+                <div class="mb-3">
+                    <span th:each="s : ${match.missingRequiredSkills}" class="badge-missing" th:text="${s}"></span>
+                    <span th:if="${#lists.isEmpty(match.missingRequiredSkills)}" class="text-muted small">None</span>
+                </div>
+            </div>
+
+            <div class="card card-custom p-4" th:if="${!#lists.isEmpty(match.recommendedCourses)}">
+                <h5 class="fw-bold mb-3"><i class="bi bi-mortarboard text-primary me-2"></i>Curated Upskilling Pathways</h5>
+                <div class="list-group">
+                    <a th:each="c : ${match.recommendedCourses}" th:href="${c.url}" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between">
+                        <div>
+                            <span class="badge bg-secondary me-2" th:text="${c.skillName}"></span>
+                            <span class="fw-bold text-dark" th:text="${c.title}"></span>
+                            <div class="text-muted small" th:text="${c.provider}"></div>
+                        </div>
+                        <i class="bi bi-box-arrow-up-right text-primary"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

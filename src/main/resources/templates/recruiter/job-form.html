@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::div})}">
+<div>
+    <h3 class="fw-bold mb-4">Job Position Editor</h3>
+    <div class="card card-custom p-4">
+        <form th:action="@{/recruiter/jobs/save}" th:object="${jobDto}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Job Title</label>
+                    <input type="text" th:field="*{title}" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Company</label>
+                    <input type="text" th:field="*{company}" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Location</label>
+                    <input type="text" th:field="*{location}" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Experience Level</label>
+                    <select th:field="*{experienceLevel}" class="form-select">
+                        <option value="ENTRY">Entry Level</option>
+                        <option value="MID_LEVEL">Mid Level</option>
+                        <option value="SENIOR">Senior</option>
+                        <option value="LEAD">Lead / Architect</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Job Type</label>
+                    <select th:field="*{jobType}" class="form-select">
+                        <option value="FULL_TIME">Full Time</option>
+                        <option value="PART_TIME">Part Time</option>
+                        <option value="HYBRID">Hybrid</option>
+                        <option value="REMOTE">Remote</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Required Skills (comma separated)</label>
+                    <input type="text" th:field="*{requiredSkills}" class="form-control" placeholder="JAVA, SPRING BOOT, MYSQL" required>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Preferred Skills (comma separated)</label>
+                    <input type="text" th:field="*{preferredSkills}" class="form-control" placeholder="DOCKER, AWS">
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Job Description</label>
+                    <textarea th:field="*{description}" class="form-control" rows="4" required></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Save Job Posting</button>
+        </form>
+    </div>
+</div>
+</html>

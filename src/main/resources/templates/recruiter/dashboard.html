@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::div})}">
+<div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold mb-0">Recruiter Dashboard</h3>
+        <a th:href="@{/recruiter/jobs/new}" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Post New Job</a>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card card-custom p-4 border-start border-4 border-primary">
+                <h6 class="text-muted">Active Listings</h6>
+                <h2 class="fw-bold mb-0" th:text="${totalJobs}">0</h2>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-custom p-4 border-start border-4 border-success">
+                <h6 class="text-muted">Candidate Applications</h6>
+                <h2 class="fw-bold mb-0" th:text="${totalApplicants}">0</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom p-4">
+        <h5 class="fw-bold mb-3">Applicant Pipeline</h5>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Candidate</th>
+                        <th>Position</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="app : ${applications}">
+                        <td>
+                            <strong th:text="${app.candidate.user.name}"></strong><br>
+                            <small class="text-muted" th:text="${app.candidate.user.email}"></small>
+                        </td>
+                        <td th:text="${app.job.title}"></td>
+                        <td><span class="badge bg-success" th:text="${app.matchScoreAtApplication} + '%'"></span></td>
+                        <td><span class="badge bg-secondary" th:text="${app.status}"></span></td>
+                        <td>
+                            <form th:action="@{/recruiter/applications/status}" method="post" class="d-inline-flex gap-1">
+                                <input type="hidden" name="applicationId" th:value="${app.id}">
+                                <select name="status" class="form-select form-select-sm" style="width: auto;">
+                                    <option value="REVIEWING">Reviewing</option>
+                                    <option value="SHORTLISTED">Shortlisted</option>
+                                    <option value="REJECTED">Rejected</option>
+                                    <option value="HIRED">Hired</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-outline-dark">Set</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</html>

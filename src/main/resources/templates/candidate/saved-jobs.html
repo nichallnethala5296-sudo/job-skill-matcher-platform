@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::div})}">
+<div>
+    <h3 class="fw-bold mb-4">Saved Job Positions</h3>
+    <div th:if="${#lists.isEmpty(savedJobs)}" class="text-muted">No jobs saved yet.</div>
+    <div class="row g-3" th:unless="${#lists.isEmpty(savedJobs)}">
+        <div th:each="item : ${savedJobs}" class="col-md-12">
+            <div class="card card-custom p-3 d-flex flex-row justify-content-between align-items-center">
+                <div>
+                    <h5 class="fw-bold mb-1" th:text="${item.job.title}">Title</h5>
+                    <span class="text-muted" th:text="${item.job.company} + ' &bull; ' + ${item.job.location}"></span>
+                </div>
+                <div class="d-flex gap-2">
+                    <a th:href="@{/candidate/match-analysis/{id}(id=${item.job.id})}" class="btn btn-outline-primary btn-sm">Fit Analysis</a>
+                    <form th:action="@{/candidate/save/{id}(id=${item.job.id})}" method="post">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

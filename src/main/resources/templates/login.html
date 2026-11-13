@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::div})}">
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card card-custom p-4">
+            <h3 class="fw-bold text-center mb-4">Sign In</h3>
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="username" class="form-control" placeholder="name@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Sign In</button>
+            </form>
+            <div class="mt-4 p-3 bg-light rounded border small">
+                <strong>Demo Accounts (password: Password123!):</strong><br>
+                Candidate: <code>alex.candidate@gmail.com</code><br>
+                Recruiter: <code>recruiter@techcorp.com</code><br>
+                Admin: <code>admin@jobmatcher.com</code>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

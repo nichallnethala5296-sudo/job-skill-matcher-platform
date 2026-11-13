@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::div})}">
+<div>
+    <div class="p-5 mb-4 bg-white rounded-4 border shadow-sm">
+        <h1 class="display-5 fw-bold">Job Skill Matcher & AI Gap Analysis</h1>
+        <p class="lead text-secondary">Upload your PDF or DOCX resume, extract verified skills, calculate transparent deterministic match scores, and receive learning pathway recommendations.</p>
+        <div class="d-flex gap-3">
+            <a th:href="@{/jobs}" class="btn btn-primary btn-lg"><i class="bi bi-search me-2"></i>Explore Live Jobs</a>
+            <a th:href="@{/register}" class="btn btn-outline-dark btn-lg">Create Free Account</a>
+        </div>
+    </div>
+</div>
+</html>

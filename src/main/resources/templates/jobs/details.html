@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::div})}">
+<div>
+    <div class="card card-custom p-4">
+        <h3 class="fw-bold mb-1" th:text="${job.title}">Title</h3>
+        <p class="text-muted" th:text="${job.company} + ' &bull; ' + ${job.location} + ' &bull; ' + ${job.jobType}"></p>
+        <hr>
+        <h5>Description</h5>
+        <p th:text="${job.description}"></p>
+        <h5>Required Skills</h5>
+        <p><span th:each="s : ${#strings.arraySplit(job.requiredSkills, ',')}" class="badge-skill" th:text="${#strings.trim(s)}"></span></p>
+        <div class="mt-4 d-flex gap-2">
+            <a th:href="@{/candidate/match-analysis/{id}(id=${job.id})}" class="btn btn-primary">Check Fit & Apply</a>
+            <a th:href="@{/jobs}" class="btn btn-outline-secondary">Back to Listings</a>
+        </div>
+    </div>
+</div>
+</html>
